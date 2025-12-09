@@ -1,0 +1,29 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+.vscode/
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+
+## NuGet
+*.nupkg
+packages/
+
+## Environment
+.env
+.env.local
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Railway
+.railway/
+
+## Logs
+*.log
