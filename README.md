@@ -2,26 +2,6 @@
 
 Microservice de gestion de panier avec Redis - ASP.NET Core 8
 
-# Architecture
-
-┌─────────────────┐
-│   Client API    │
-└────────┬────────┘
-         │
-         v
-┌─────────────────┐     ┌──────────────┐
-│  Cart Service   │────>│    Redis     │
-│  (ASP.NET 8)    │     │   (Cache)    │
-└─────────────────┘     └──────────────┘
-         │
-         v
-┌─────────────────┐
-│ Product Service │
-│   (Mock/API)    │
-└─────────────────┘
-
-
-
 ## API Endpoints
 
 ### Produits
