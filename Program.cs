@@ -9,9 +9,7 @@ builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 // Configuration Redis
 var redisUrl = Environment.GetEnvironmentVariable("REDIS_URL")
-    ?? Environment.GetEnvironmentVariable("REDIS_PRIVATE_URL")
-    ?? builder.Configuration.GetConnectionString("Redis")
-    ?? "localhost:6379";
+    ?? Environment.GetEnvironmentVariable("REDIS_PRIVATE_URL");
 
 // Parser Redis URL si format redis://
 if (redisUrl.StartsWith("redis://"))
@@ -56,11 +54,11 @@ try
     var redis = app.Services.GetRequiredService<IConnectionMultiplexer>();
     var db = redis.GetDatabase();
     db.Ping();
-    app.Logger.LogInformation("✅ Redis connecté");
+    app.Logger.LogInformation(" Redis connecté");
 }
 catch (Exception ex)
 {
-    app.Logger.LogError(ex, "❌ Erreur Redis");
+    app.Logger.LogError(ex, " Erreur Redis");
 }
 
 // Middleware
@@ -74,50 +72,5 @@ app.UseSwaggerUI(c =>
 app.UseCors("AllowAll");
 app.MapControllers();
 
-app.Logger.LogInformation("🚀 API démarrée sur le port {Port}", port);
+app.Logger.LogInformation("API démarrée sur le port {Port}", port);
 app.Run();
-
-
-
-
-//var builder = WebApplication.CreateBuilder(args);
-
-//// Add services to the container.
-//// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
-
-//var app = builder.Build();
-
-//// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.MapOpenApi();
-//}
-
-//app.UseHttpsRedirection();
-
-//var summaries = new[]
-//{
-//    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-//};
-
-//app.MapGet("/weatherforecast", () =>
-//{
-//    var forecast =  Enumerable.Range(1, 5).Select(index =>
-//        new WeatherForecast
-//        (
-//            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//            Random.Shared.Next(-20, 55),
-//            summaries[Random.Shared.Next(summaries.Length)]
-//        ))
-//        .ToArray();
-//    return forecast;
-//})
-//.WithName("GetWeatherForecast");
-
-//app.Run();
-
-//record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-//{
-//    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-//}
