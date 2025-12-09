@@ -2,14 +2,25 @@
 
 Microservice de gestion de panier avec Redis - ASP.NET Core 8
 
-##  Déploiement sur Railway
+# Architecture
 
-1. Fork ce repository
-2. Créer un compte sur [Railway.app](https://railway.app)
-3. New Project → Deploy from GitHub
-4. Sélectionner ce repo
-5. Ajouter Redis : + New → Database → Redis
-6. Déployer automatiquement 
+┌─────────────────┐
+│   Client API    │
+└────────┬────────┘
+         │
+         v
+┌─────────────────┐     ┌──────────────┐
+│  Cart Service   │────>│    Redis     │
+│  (ASP.NET 8)    │     │   (Cache)    │
+└─────────────────┘     └──────────────┘
+         │
+         v
+┌─────────────────┐
+│ Product Service │
+│   (Mock/API)    │
+└─────────────────┘
+
+
 
 ## API Endpoints
 
@@ -35,8 +46,6 @@ Microservice de gestion de panier avec Redis - ASP.NET Core 8
 ```bash
 docker-compose up -d
 ```
-
-Swagger : http://localhost:5000
 
 ## Stack
 
